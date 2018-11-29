@@ -1,0 +1,38 @@
+Print the Cell:
+what if I returned a string with a '|' separating every three integers and a '|' at the end of the cell and use them to split the string and print in solver?
+
+Back to the same issue -> WHAT TO DO WHEN SOLVER HAS THE FORMATTED STRING
+	I could have solver print every third one and then move on to the next line?
+
+What if instead of a two dimensional grid of cells, what if it was a list or just an array or for that matter a vector?
+	That would change my file reader routine, but that is all really because the other functions have yet to be changed.
+	So I will use a vector of Cells in order from top left to bottom right
+					1 2 3
+					4 5 6
+					7 8 9
+New Input Routine with Vector of Cells:
+	how do I keep track of what cell I need to add numbers to -> check if it is full a.k.a has 9 digits in it?
+Functions to alter:
+	int** getPuzzle(); ** removed
+	void readPuzzle(Solver*); ** changed to read puzzle as a vector cell objects
+	friend ostream& operator << (ostream& out, Solver& obj); ** changed
+	int solve(); ** changed
+	bool isSafe(int* location, int value); ** changed
+	bool checkRow(int rowNum,int value); ** changed
+	bool checkCol(int colNum,int value); ** changed
+	bool checkGrid(int &r,int &c); ** changed
+	void destroy(); ** removed
+MEMORY MAPPING may be the easiest way to get the puzzle into a manipulable state
+	|-> Ended up not doing this because it turns out that iostream vs. mmap is about the same time when dealing with files and mmap requires more memory.
+My is safe method isn't entirely effective and needs trouble shooting
+	-> checkCell returns true if value is found
+	-> checkrow returns true if value is found
+	-> checkCol returns true if value is found
+	-> checkLoc returns true if the location is a blank space
+Works!!!
+	-> Now it is time to make the intuitive enhancements
+My current implementation can solve up to expert puzzles
+
+Appears that a map of cells to the frequency is not functional b/c in order to increase frequency of cells then the less than operator has to be defined in such a way to compare Cells
+
+It appears that a map of frequencies with cells as keys is more pain than it is worth since there is no definitive way to compare cells other than equivalence
