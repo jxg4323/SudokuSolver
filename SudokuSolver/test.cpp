@@ -12,6 +12,7 @@ int main(int args, char** argv) {
 
 	output.open(outFile);
 
+
 	solver.readPuzzle(&solver);
 	
 	cout << "First Solution:\n";

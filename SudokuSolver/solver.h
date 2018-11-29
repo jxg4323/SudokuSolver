@@ -8,9 +8,6 @@
 #include<map>
 #include<algorithm>
 #include<fstream>
-//#ifndef DEBUG
-//#include<vld.h>
-//#endif // | /DEBUG
 #include"Cell.h"
 /// CONSTANTS
 #define BASE_ALLOC 4
@@ -34,4 +31,3 @@ public:
 	bool checkGrid(int &r,int &c);
 };
 #endif // ! Solver_h
-// TODO: MOVE UNECCESSARILY PUBLIC METHODS TO PRIVATE BLOCK

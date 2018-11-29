@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Cell.cpp" />
+    <ClCompile Include="Sudoku.cpp" />
     <ClCompile Include="solver.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
