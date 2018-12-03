@@ -13,6 +13,7 @@
 #define BASE_ALLOC 4
 #define FREQ_START 1
 const string CELL_DELIMITER = "|";
+bool DEBUG = false;
 using namespace std;
 class Solver {
 private:
@@ -22,6 +23,9 @@ public:
 	Solver();
 	string getInputName();
 	string getOutputName();
+	void setInputFile(string);
+	void setOutputFile(string);
+	void setDebug(bool);
 	void readPuzzle(Solver*);
 	friend ostream& operator << (ostream& out, Solver& obj);
 	bool solve();

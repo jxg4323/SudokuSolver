@@ -13,7 +13,18 @@ string Solver::getInputName() {
 string Solver::getOutputName() {
 	return outputF;
 }
+// mutators
+void Solver::setDebug(bool b) {
+	DEBUG = b;
+}
+void Solver::setInputFile(string file) {
+	inputF = file;
+}
+void Solver::setOutputFile(string file) {
+	outputF = file;
+}
 
+// Member Functions
 /*
  * Alters the input operator so that when an istream object
  * (a.k.a inputFile) and a Solver object attempts to get
