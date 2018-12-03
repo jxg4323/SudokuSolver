@@ -47,11 +47,11 @@ int main(int argc, char** argv) {
 	firstElapsedTime = double(end - begin) / CLOCKS_PER_SEC;
 	// if output file specified then output to it
 	if (outfile != "") {
-		output << solve << "Time: " << firstElapsedTime << "\n";
+		output << solve << "Time To Solve: " << firstElapsedTime << "\n";
 		output.close();
 	}
 	else // otherwise use stdout
-		cout << solve << "Time: " << firstElapsedTime << "\n";
+		cout << solve << "Time To Solve: " << firstElapsedTime << "\n";
 
 	return result;
 }
