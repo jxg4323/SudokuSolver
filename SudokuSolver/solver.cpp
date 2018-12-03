@@ -140,6 +140,9 @@ bool Solver::solve() {
 	}
 	// change to intuitively pick most likely number
 	for (int i = 1; i <= STANDARD_SIZE; i++) {
+		if (DEBUG) {
+			cout << *this;
+		}
 		if (isSafe(cellNum,loc, i)) {
 			grid[cellNum].addNum(loc, i);
 			if (solve()) {

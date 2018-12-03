@@ -2,18 +2,11 @@
 #include <ctime>
 #include <boost/program_options.hpp>
 
-void help() {
-	fprintf(stderr,"usage: Sudoku [-hd] [-i INFILE] [-o OUTFILE]\n"
-		"Options:\n"
-		"-h\t Prints helpful message to stdout\n" 
-		"-d\t Debug output\n"
-		"-i INFILE Read puzzle from INFILE (Default 'stdin prompt'/puzzle)"
-		"-o OUTFILE Write solved puzzle to OUTFILE (Default stdout)");
-}
-
 int main(int argc, char** argv) {
 	bool debug = false;
 	int result = EXIT_SUCCESS;
+	ofstream output;
+	double firstElapsedTime(0);
 	string infile, outfile;
 	Solver solve = Solver();
 
@@ -22,14 +15,13 @@ int main(int argc, char** argv) {
 	desc.add_options()
 		("help,h","Prints Helpful Message")
 		("debug,d","Debug Output")
-		("input,i","Provide Input puzzle File")
-		("output,o","Provide Solution Output Location");
+		("input,i",po::value<string>()->default_value("puzzle2"),"Provide Input puzzle File")
+		("output,o",po::value<string>()->default_value(""),"Provide Solution Output Location");
 	po::variables_map vm;
 	po::store(po::parse_command_line(argc, argv, desc), vm);
 	po::notify(vm);
 
 	if (vm.count("help")) {
-		help();
 		cout << "\n" << desc << "\n";
 	}
 	else if (vm.count("debug")) {
@@ -43,27 +35,23 @@ int main(int argc, char** argv) {
 	else if (vm.count("output")) {
 		outfile = vm["output"].as<string>();
 		solve.setOutputFile(outfile);
+		output.open(outfile);
 	}
 
-	/*ofstream output;
-	Solver solver = Solver();
-	string outFile = solver.getOutputName();
+	solve.readPuzzle(&solve);
 
-	double firstElapsedTime(0);
-
-	output.open(outFile);
-
-
-	solver.readPuzzle(&solver);
-
-	cout << "First Solution:\n";
+	cout << "Solution:\n";
 	clock_t begin = clock();
-	solver.solve();
+	solve.solve();
 	clock_t end = clock();
 	firstElapsedTime = double(end - begin) / CLOCKS_PER_SEC;
-	cout << solver << "Time: " << firstElapsedTime << "\n";
-
-	output.close();*/
+	// if output file specified then output to it
+	if (outfile != "") {
+		output << solve << "Time: " << firstElapsedTime << "\n";
+		output.close();
+	}
+	else // otherwise use stdout
+		cout << solve << "Time: " << firstElapsedTime << "\n";
 
 	return result;
 }

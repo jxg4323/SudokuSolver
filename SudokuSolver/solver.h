@@ -13,13 +13,13 @@
 #define BASE_ALLOC 4
 #define FREQ_START 1
 const string CELL_DELIMITER = "|";
-bool DEBUG = false;
 using namespace std;
 class Solver {
 private:
 	vector<Cell> grid;
 	string inputF, outputF;
 public:
+	bool DEBUG = false;
 	Solver();
 	string getInputName();
 	string getOutputName();
